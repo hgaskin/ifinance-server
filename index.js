@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 
 const dotenv = require("dotenv");
 
+const cors = require("cors");
+
+// parse cookie data
+const cookieParser = require("cookie-parser")
+
 dotenv.config();
 
 // setup express server
@@ -10,6 +15,16 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+// ================ Middleware =======
+//Setup CORS to allow CROSS ORIGIN >>>> "app.use(cors());" <<<< commmunication between Server and Client side of APP ///
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+    })
+);
+
+app.use(cookieParser());
 
 app.listen(5000, () => console.log("Server (backend) started on port 5000!"));
 
@@ -18,6 +33,7 @@ app.listen(5000, () => console.log("Server (backend) started on port 5000!"));
 // setting up Routers MiddleWare
 
 app.use("/stock_data", require("./routers/stockRouter"));
+app.use("/auth", require("./routers/userRouter"));
 
 // Connect to MongoDB
 
