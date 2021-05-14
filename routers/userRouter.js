@@ -175,7 +175,18 @@ router.get("/loggedIn", (req, res) => {
 // 9. logout request for user to clear the cookie =========
     router.get("/logOut", (req, res) => {
         try {
-            res.clearCookie("token").send();
+            res.cookie("token", "", {
+                httpOnly: true,
+            sameSite:
+                process.env.NODE_ENV === "development"
+                ? "lax"
+                : process.env.NODE_ENV === "production" && "none",
+            secure:
+                process.env.NODE_ENV === "development"
+                ? false 
+                : process.env.NODE_ENV === "production" && true,
+            expires: new Date(0),
+            }).send();
         } catch (err) {
             return res.json(null);
         }
