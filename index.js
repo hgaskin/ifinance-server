@@ -19,7 +19,7 @@ app.use(express.json());
 //Setup CORS to allow CROSS ORIGIN >>>> "app.use(cors());" <<<< commmunication between Server and Client side of APP ///
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000", "https://ifinance-hgaskin.netlify.app" ],
         credentials: true,
     })
 );
