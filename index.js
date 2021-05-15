@@ -6,7 +6,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 // parse cookie data
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
+const { get } = require("./routers/userRouter");
 
 dotenv.config();
 
@@ -14,10 +15,11 @@ dotenv.config();
 
 const app = express();
 
+//Setup CORS to allow CROSS ORIGIN >>>> "app.use(cors());" <<<< commmunication between Server and Client side of APP ///
+
 app.use(express.json());
 // ================ Middleware =======
-//Setup CORS to allow CROSS ORIGIN >>>> "app.use(cors());" <<<< commmunication between Server and Client side of APP ///
-app.use(
+app.use( 
     cors({
         origin: ["http://localhost:3000", "https://ifinance-hgaskin.netlify.app"],
         credentials: true,
